@@ -3,7 +3,9 @@
 
 SDL_AppResult SDL_AppIterate(void *appstate){
 
-    SDL_RenderPresent(app.renderer);
+    if(render()){
+        return SDL_APP_FAILURE;
+    }
     
     return SDL_APP_CONTINUE;
 }
