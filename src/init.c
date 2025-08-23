@@ -5,15 +5,18 @@
 
 App app;
 Map map;
+Camera camera;
 
 
 int app_init(App *app){
 
+    app->fps = 0;
     app->width = 800;
     app->height = 800;
     app->texture_height = 50;
     app->texture_width = 50;
     app->windowFlags = SDL_WINDOW_MAXIMIZED;
+
 
 
     if(!SDL_Init(SDL_INIT_VIDEO)){
@@ -54,22 +57,11 @@ int map_init(Map *map){
 
 int textures_init(Map *map){
 
-    SDL_Surface *red_surface = SDL_LoadBMP("./assets/red.bmp");
-    SDL_Surface *green_surface = SDL_LoadBMP("./assets/green.bmp");
-    SDL_Surface *blue_surface = SDL_LoadBMP("./assets/blue.bmp");
 
-    if(!red_surface || !green_surface || !blue_surface){
-        printf("failed to load bmp images\n");
-        return 1;
-    }
+    map->red_texture = IMG_LoadTexture(app.renderer, "../assets/red.bmp");
+    map->green_texture = IMG_LoadTexture(app.renderer, "../assets/green.bmp");
+    map->blue_texture = IMG_LoadTexture(app.renderer, "../assets/blue.bmp");
 
-    map->red_texture = SDL_CreateTextureFromSurface(app.renderer, red_surface);
-    map->green_texture = SDL_CreateTextureFromSurface(app.renderer, green_surface);
-    map->blue_texture = SDL_CreateTextureFromSurface(app.renderer, blue_surface);
-    
-    SDL_DestroySurface(red_surface);
-    SDL_DestroySurface(blue_surface);
-    SDL_DestroySurface(green_surface);
 
     //bad
     for(int y = 0; y < map->height; y++){
@@ -126,7 +118,24 @@ int textures_init(Map *map){
 
 
 
+int camera_init(Camera *camera){
+
+    camera->texture = IMG_LoadTexture(app.renderer, "../assets/yellow.jpg");
+    camera->x = 100.0f;
+    camera->y = 201.0f;
+    camera->height = app.height / app.texture_height;
+    camera->width = app.width / app.texture_width;
+
+    // camera->height = 3;
+    // camera->width = 3;
+
+    return 0;
+}
+
+
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
+
+    printf("Use 'wasd' for controls\n");
 
     if(app_init(&app))
         return SDL_APP_FAILURE;
@@ -138,9 +147,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
     if(textures_init(&map)){
         return SDL_APP_FAILURE;
     }
-    
-    
 
+    if(camera_init(&camera)){
+        return SDL_APP_FAILURE;
+    }
 
     return SDL_APP_CONTINUE;
 }

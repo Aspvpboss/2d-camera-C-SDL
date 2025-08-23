@@ -9,5 +9,6 @@ typedef struct{
     SDL_WindowFlags windowFlags;
     int width, height;
     int texture_width, texture_height;
+    double dt, fps;
  
 }App;
