@@ -11,6 +11,7 @@ Camera camera;
 int app_init(App *app){
 
     app->fps = 0;
+    app->max_fps_limit = 400.0f;
     app->width = 800;
     app->height = 800;
     app->texture_height = 50;
@@ -58,9 +59,9 @@ int map_init(Map *map){
 int textures_init(Map *map){
 
 
-    map->red_texture = IMG_LoadTexture(app.renderer, "../assets/red.bmp");
-    map->green_texture = IMG_LoadTexture(app.renderer, "../assets/green.bmp");
-    map->blue_texture = IMG_LoadTexture(app.renderer, "../assets/blue.bmp");
+    map->red_texture = IMG_LoadTexture(app.renderer, "assets/red.bmp");
+    map->green_texture = IMG_LoadTexture(app.renderer, "assets/green.bmp");
+    map->blue_texture = IMG_LoadTexture(app.renderer, "assets/blue.bmp");
 
 
     //bad
@@ -120,14 +121,12 @@ int textures_init(Map *map){
 
 int camera_init(Camera *camera){
 
-    camera->texture = IMG_LoadTexture(app.renderer, "../assets/yellow.jpg");
+    camera->texture = IMG_LoadTexture(app.renderer, "assets/yellow.jpg");
     camera->x = 100.0f;
     camera->y = 201.0f;
     camera->height = app.height / app.texture_height;
     camera->width = app.width / app.texture_width;
-
-    // camera->height = 3;
-    // camera->width = 3;
+    camera->speed = 800;
 
     return 0;
 }
