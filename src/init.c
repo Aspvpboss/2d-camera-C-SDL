@@ -11,9 +11,9 @@ Camera camera;
 int app_init(App *app){
 
     app->fps = 0;
-    app->max_fps_limit = 400.0f;
-    app->width = 800;
-    app->height = 800;
+    app->max_fps_limit = 40000.0f;
+    app->width = 1000;
+    app->height = 1000;
     app->texture_height = 50;
     app->texture_width = 50;
     app->windowFlags = SDL_WINDOW_MAXIMIZED;
@@ -121,9 +121,9 @@ int textures_init(Map *map){
 
 int camera_init(Camera *camera){
 
-    camera->texture = IMG_LoadTexture(app.renderer, "assets/yellow.jpg");
-    camera->x = 100.0f;
-    camera->y = 201.0f;
+    camera->texture = IMG_LoadTexture(app.renderer, "assets/yellow.png");
+    camera->x = 0.0f;
+    camera->y = 0.0f;
     camera->height = app.height / app.texture_height;
     camera->width = app.width / app.texture_width;
     camera->speed = 800;
