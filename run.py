@@ -1,2 +1,2 @@
 import subprocess
-subprocess.run("gcc -Wall -Werror -Wpedantic -o SDL_2d_camera src/*.c -Iinclude -lSDL3 -lSDL3_image -I C:\\msys64\\ucrt64\\include -L C:\\msys64\\ucrt64\\lib && SDL_2d_camera", shell = True)
+subprocess.run("gcc -Wall -Werror -Wpedantic -o SDL_2d_camera src/events.c src/init.c src/iterate.c src/quit.c src/render.c src/update.c -Iinclude -lSDL3 -lSDL3_image -I C:\\msys64\\ucrt64\\include -L C:\\msys64\\ucrt64\\lib && SDL_2d_camera", shell = True)
